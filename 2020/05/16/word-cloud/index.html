@@ -212,7 +212,9 @@ And run <code class="language-plaintext highlighter-rouge">pip install -r requir
 <h2 id="the-python-code">The python code</h2>
 
 <p>I will work in a Jupyter notebook. 
-First, let’s import the packages.</p>
+The input files can be found on <a href="https://github.com/chwyean/wordcloud-tutorial">github</a>.</p>
+
+<p>First, let’s import the packages.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
@@ -226,7 +228,18 @@ and the base image file <code class="language-plaintext highlighter-rouge">pikac
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pokemon-names.txt'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">orig_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pikachu.png"</span><span class="p">))</span></code></pre></figure>
 
-<p>The image will be used as a mask, where every <em>pure white</em> pixel (with RGB code <code class="language-plaintext highlighter-rouge">#FFFFFF</code>)
+<p>The text file <code class="language-plaintext highlighter-rouge">pokemon-names.txt</code> contains only names of Pokemons, like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+Caterpie
+Chansey
+Charizard
+Charmander
+Charmeleon
+Clefable
+...
+</code></pre></div></div>
+
+<p>The image <code class="language-plaintext highlighter-rouge">orig_image</code> will be used as a mask, where every <em>pure white</em> pixel (with RGB code <code class="language-plaintext highlighter-rouge">#FFFFFF</code>)
 will be left white in the output image.
 We can use any color generator, but if we can to copy the coloring style of the base image,
 we need to add this line:</p>
@@ -472,6 +485,8 @@ And run pip install -r requirements.txt in a terminal.
 The python code
 
 I will work in a Jupyter notebook. 
+The input files can be found on github.
+
 First, let’s import the packages.
 
 from PIL import Image
@@ -486,7 +501,18 @@ and the base image file pikachu.png. These files are located in the current work
 text = open('pokemon-names.txt').read()
 orig_image = np.array(Image.open(&quot;pikachu.png&quot;))
 
-The image will be used as a mask, where every pure white pixel (with RGB code #FFFFFF)
+The text file pokemon-names.txt contains only names of Pokemons, like this:
+...
+Caterpie
+Chansey
+Charizard
+Charmander
+Charmeleon
+Clefable
+...
+
+
+The image orig_image will be used as a mask, where every pure white pixel (with RGB code #FFFFFF)
 will be left white in the output image.
 We can use any color generator, but if we can to copy the coloring style of the base image,
 we need to add this line:
@@ -536,7 +562,7 @@ Finally, the answers are…
 In case you are still scratching your head over the Pokemon images shown at the start of this post,
 here are the answers: #1 is Pikachu, and #2 is Mew.
 ",
-            "wordcount": "767",
+            "wordcount": "805",
             "inLanguage": "en",
             "dateCreated": "2020-05-16/",
             "datePublished": "2020-05-16/",
