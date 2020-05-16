@@ -17,7 +17,7 @@
     
     
 
-    <title>Hello World! | chwyean's blog</title>
+    <title>Create word cloud images with python | chwyean's blog</title>
     <meta name="description" content="This blog is like a personal notebook where I write down different technologies I learned, experimented or found interesting.">
     
         <meta name="keywords" content="">
@@ -25,15 +25,15 @@
 
     <!-- Social: Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Hello World! | chwyean's blog">
+    <meta name="twitter:title" content="Create word cloud images with python | chwyean's blog">
     <meta name="twitter:description" content="This blog is like a personal notebook where I write down different technologies I learned, experimented or found interesting.">
-    <meta property="twitter:image:src" content="/assets/img/hello-world.jpeg">
+    <meta property="twitter:image:src" content="/assets/img/pokemon-1.png">
     
 
     <!-- Social: Facebook / Open Graph -->
-    <meta property="og:url" content="https://chwyean.github.io/2020/05/07/hello-world/">
-    <meta property="og:title" content="Hello World! | chwyean's blog">
-    <meta property="og:image" content="/assets/img/hello-world.jpeg">
+    <meta property="og:url" content="https://chwyean.github.io/2020/05/16/word-cloud/">
+    <meta property="og:title" content="Create word cloud images with python | chwyean's blog">
+    <meta property="og:image" content="/assets/img/pokemon-1.png">
     <meta property="og:description" content="This blog is like a personal notebook where I write down different technologies I learned, experimented or found interesting.">
     <meta property="og:site_name" content="chwyean's blog">
 
@@ -66,7 +66,7 @@
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700" rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="canonical" href="https://chwyean.github.io/2020/05/07/hello-world/">
+    <link rel="canonical" href="https://chwyean.github.io/2020/05/16/word-cloud/">
     <link rel="alternate" type="application/rss+xml" title="chwyean's blog" href="https://chwyean.github.io/feed.xml" />
 
     <!-- Include extra styles -->
@@ -149,22 +149,22 @@
                 <p class="post-info">
                     
                         <svg class="icon-calendar" id="date"><use xlink:href="#icon-calendar"></use></svg>
-                        <time class="date" datetime="2020-05-07T00:00:00+08:00">
+                        <time class="date" datetime="2020-05-16T00:00:00+08:00">
                             
 
 
-May 7, 2020
+May 16, 2020
 
                         </time>
                     
                     <svg id="clock" class="icon-clock"><use xlink:href="#icon-clock"></use></svg>
-                    <span>1 min to read</span>
+                    <span>4 min to read</span>
                 </p>
-                <h1 class="post-title">Hello World!</h1>
+                <h1 class="post-title">Create word cloud images with python</h1>
                 <p class="post-subtitle"></p>
 
                 
-                    <img src="/assets/img/hello-world.jpeg" alt="Featured image" class="post-cover">
+                    <img src="/assets/img/pokemon-1.png" alt="Featured image" class="post-cover">
                 
 
                 <!-- Pagination links -->
@@ -174,21 +174,103 @@ May 7, 2020
                 <!-- Add your table of contents here -->
 
 
-                <p>This is a test file.</p>
+                <p>Can you guess the pokemon above? How about the pokemon below?</p>
 
-<p>What is MathJax</p>
+<p><img src="/assets/img/pokemon-2.png" alt="pokemon2" /></p>
 
-<p>MathJax is a javascript library that uses the TeX algorithms and fonts to display math formulas on HTML pages. It allows for very fine-grained configuration, is widely used and works on all modern browsers.</p>
+<p>I came across a fun and simple python package called <a href="https://amueller.github.io/word_cloud">wordcloud</a>.
+I will give a short tutorial in this post, adapted from this 
+<a href="https://amueller.github.io/word_cloud/auto_examples/colored.html">example</a> on the official site.</p>
 
-<p>This engine marks up math formulas with HTML <script type="math/tex"> tags that MathJax understands. The only other thing to do is to include the MathJax library itself on the HTML page.
-Choose Markdown converter</script></p>
+<h2 id="whats-a-word-cloud">What’s a Word Cloud?</h2>
 
-<p>Kramdown, a fast, pure-Ruby Markdown-superset converter, has built-in support for block and span-level mathematics written in LATEX. 
-What’s more, for Jekyll sites hosted on GitHub Pages, only the kramdown engine is supported.</p>
+<p><em>Word cloud</em> generators are visualization tools used for text analysis.
+In general, images created are composed of <strong>words</strong> of different sizes and colors.
+Popular words would be printed in larger font sizes, whereas the less frequent words would be displayed smaller.
+Moreover, the image can be generated to copy the coloring of a base image.</p>
 
-<p>If you are using other Markdown converter, like redcarpet, you need to change to markdown: kramdown in your _config.yml file.</p>
+<p>In this tutorial, I will show how to display an image using a word cloud.
+I will not focus on text popularity (though it is easy to modify the example for such purpose).
+We will take a base image (Pikachu!) and generate something like this:</p>
 
-<p>Note that kramdown does not ship with the MathJax library and that therefore the “default” template does not include a link to it! we need to add a link to MathJax to our page.</p>
+<p><img src="/assets/img/pokemon-comp-1.png" alt="pokemon-comp-1" /></p>
+
+<h2 id="install-python-package">Install python package</h2>
+
+<p>First, you will need the <code class="language-plaintext highlighter-rouge">wordcloud</code> package. 
+Use <code class="language-plaintext highlighter-rouge">pip</code> or <code class="language-plaintext highlighter-rouge">conda</code> to install it.
+I use wordcloud version <code class="language-plaintext highlighter-rouge">1.7.0</code> and Python 3.7 for this tutorial.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install wordcloud
+</code></pre></div></div>
+
+<p>You may need to install additional pacakges like <code class="language-plaintext highlighter-rouge">matplotlib</code>, <code class="language-plaintext highlighter-rouge">numpy</code>, etc.</p>
+
+<h2 id="the-python-code">The python code</h2>
+
+<p>I will work in a Jupyter notebook. 
+First, let’s import the packages.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span><span class="p">,</span> <span class="n">ImageColorGenerator</span></code></pre></figure>
+
+<p>Now, we run the word cloud generator with the text given in file <code class="language-plaintext highlighter-rouge">pokemon-names.txt</code>
+and the base image file <code class="language-plaintext highlighter-rouge">pikachu.png</code>. These files are located in the current working directory.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pokemon-names.txt'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">orig_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pikachu.png"</span><span class="p">))</span></code></pre></figure>
+
+<p>The image will be used as a mask, where every <em>pure white</em> pixel (with RGB code <code class="language-plaintext highlighter-rouge">#FFFFFF</code>)
+will be left white in the output image.
+We can use any color generator, but if we can to copy the coloring style of the base image,
+we need to add this line:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">image_colors</span> <span class="o">=</span> <span class="n">ImageColorGenerator</span><span class="p">(</span><span class="n">orig_image</span><span class="p">)</span></code></pre></figure>
+
+<p>Next, we initialize the word cloud object.
+Since we have only limited number of words in our text corpus (it contains the list of
+Pokemon Gen 1 names), we set <code class="language-plaintext highlighter-rouge">repeat=True</code> and <code class="language-plaintext highlighter-rouge">stopwords=set()</code> to not ignore any words from the list (just in case).
+Note we are not interested in the frequency of the words.
+Other important parameters are <code class="language-plaintext highlighter-rouge">max_words</code>, <code class="language-plaintext highlighter-rouge">max_font_size</code> and <code class="language-plaintext highlighter-rouge">min_font_size</code> that will <em>guide</em>
+the generation of the image. Changing these parameters may not always change the output.
+Even if you set <code class="language-plaintext highlighter-rouge">max_words=10000</code>, there might not be enough space to display that many words.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">wc</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">background_color</span><span class="o">=</span><span class="s">"white"</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+               <span class="n">mask</span><span class="o">=</span><span class="n">orig_image</span><span class="p">,</span> 
+               <span class="n">color_func</span><span class="o">=</span><span class="n">image_colors</span><span class="p">,</span>
+               <span class="n">stopwords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+               <span class="n">max_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">min_font_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">11013</span><span class="p">)</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code></pre></figure>
+
+<p>Let’s now display the word cloud in Jupyter and save it to the file <code class="language-plaintext highlighter-rouge">output.png</code>.
+You can try different interpolation algorithms like <code class="language-plaintext highlighter-rouge">bicubic</code>, <code class="language-plaintext highlighter-rouge">gaussian</code>, and more.
+I find <code class="language-plaintext highlighter-rouge">bilinear</code> works nicely for text.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">"off"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">"bilinear"</span><span class="p">)</span>
+    
+<span class="c1"># must save image before calling plt.show()    
+</span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'output.png'</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">'tight'</span><span class="p">)</span>
+
+<span class="c1"># display image in Jupyter
+</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p>There you go!</p>
+
+<p><img src="/assets/img/pokemon-1.png" alt="pokemon1" /></p>
+
+<h2 id="source-code">Source code</h2>
+
+<p>The Jupyter notebook, text file and image are available on <a href="https://github.com/chwyean/wordcloud-tutorial">github</a>.</p>
+
+<h2 id="finally-the-answers-are">Finally, the answers are…</h2>
+
+<p>In case you are still scratching your head over the Pokemon images shown at the start of this post,
+here are the answers: #1 is <strong>Pikachu</strong>, and #2 is <strong>Mew</strong>.</p>
 
 
                 <!-- Pagination links -->
@@ -343,31 +425,114 @@ What’s more, for Jekyll sites hosted on GitHub Pages, only the kramdown engine
         {
             "@context": "http://schema.org",
             "@type": "BlogPosting",
-            "name": "Hello World!",
+            "name": "Create word cloud images with python",
             "headline": "",
             "description": "",
-            "image": "/assets/img/hello-world.jpeg",
-            "url": "https://chwyean.github.io/2020/05/07/hello-world/",
-            "articleBody": "This is a test file.
+            "image": "/assets/img/pokemon-1.png",
+            "url": "https://chwyean.github.io/2020/05/16/word-cloud/",
+            "articleBody": "Can you guess the pokemon above? How about the pokemon below?
 
-What is MathJax
 
-MathJax is a javascript library that uses the TeX algorithms and fonts to display math formulas on HTML pages. It allows for very fine-grained configuration, is widely used and works on all modern browsers.
 
-This engine marks up math formulas with HTML 
+I came across a fun and simple python package called wordcloud.
+I will give a short tutorial in this post, adapted from this 
+example on the official site.
 
-Kramdown, a fast, pure-Ruby Markdown-superset converter, has built-in support for block and span-level mathematics written in LATEX. 
-What’s more, for Jekyll sites hosted on GitHub Pages, only the kramdown engine is supported.
+What’s a Word Cloud?
 
-If you are using other Markdown converter, like redcarpet, you need to change to markdown: kramdown in your _config.yml file.
+Word cloud generators are visualization tools used for text analysis.
+In general, images created are composed of words of different sizes and colors.
+Popular words would be printed in larger font sizes, whereas the less frequent words would be displayed smaller.
+Moreover, the image can be generated to copy the coloring of a base image.
 
-Note that kramdown does not ship with the MathJax library and that therefore the “default” template does not include a link to it! we need to add a link to MathJax to our page.
+In this tutorial, I will show how to display an image using a word cloud.
+I will not focus on text popularity (though it is easy to modify the example for such purpose).
+We will take a base image (Pikachu!) and generate something like this:
+
+
+
+Install python package
+
+First, you will need the wordcloud package. 
+Use pip or conda to install it.
+I use wordcloud version 1.7.0 and Python 3.7 for this tutorial.
+
+pip install wordcloud
+
+
+You may need to install additional pacakges like matplotlib, numpy, etc.
+
+The python code
+
+I will work in a Jupyter notebook. 
+First, let’s import the packages.
+
+from PIL import Image
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+from wordcloud import WordCloud, ImageColorGenerator
+
+Now, we run the word cloud generator with the text given in file pokemon-names.txt
+and the base image file pikachu.png. These files are located in the current working directory.
+
+text = open('pokemon-names.txt').read()
+orig_image = np.array(Image.open(&quot;pikachu.png&quot;))
+
+The image will be used as a mask, where every pure white pixel (with RGB code #FFFFFF)
+will be left white in the output image.
+We can use any color generator, but if we can to copy the coloring style of the base image,
+we need to add this line:
+
+image_colors = ImageColorGenerator(orig_image)
+
+Next, we initialize the word cloud object.
+Since we have only limited number of words in our text corpus (it contains the list of
+Pokemon Gen 1 names), we set repeat=True and stopwords=set() to not ignore any words from the list (just in case).
+Note we are not interested in the frequency of the words.
+Other important parameters are max_words, max_font_size and min_font_size that will guide
+the generation of the image. Changing these parameters may not always change the output.
+Even if you set max_words=10000, there might not be enough space to display that many words.
+
+wc = WordCloud(background_color=&quot;white&quot;, max_words=1000, repeat=True,
+               mask=orig_image, 
+               color_func=image_colors,
+               stopwords=None,
+               max_font_size=40, min_font_size=3, random_state=11013)
+wc.generate(text)
+
+Let’s now display the word cloud in Jupyter and save it to the file output.png.
+You can try different interpolation algorithms like bicubic, gaussian, and more.
+I find bilinear works nicely for text.
+
+plt.figure(figsize=(15,10))
+plt.axis(&quot;off&quot;)
+plt.imshow(wc, interpolation=&quot;bilinear&quot;)
+    
+# must save image before calling plt.show()    
+plt.savefig('output.png',bbox_inches='tight')
+
+# display image in Jupyter
+plt.show()
+
+There you go!
+
+
+
+Source code
+
+The Jupyter notebook, text file and image are available on github.
+
+Finally, the answers are…
+
+In case you are still scratching your head over the Pokemon images shown at the start of this post,
+here are the answers: #1 is Pikachu, and #2 is Mew.
 ",
-            "wordcount": "162",
+            "wordcount": "730",
             "inLanguage": "en",
-            "dateCreated": "2020-05-07/",
-            "datePublished": "2020-05-07/",
-            "dateModified": "2020-05-07/",
+            "dateCreated": "2020-05-16/",
+            "datePublished": "2020-05-16/",
+            "dateModified": "2020-05-16/",
             "author": {
                 "@type": "Person",
                 "name": "chwyean",
