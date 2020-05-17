@@ -20,7 +20,7 @@
     <title>Writing Math in Markdown | chwyean's blog</title>
     <meta name="description" content="This blog is like a personal notebook where I write down different technologies I learned, experimented or found interesting.">
     
-        <meta name="keywords" content="">
+        <meta name="keywords" content="markdown">
     
 
     <!-- Social: Twitter -->
@@ -123,12 +123,6 @@
       </li>
     
   
-    
-      <li>
-        <a href="https://chwyean.github.io/contact">Contact</a>
-      </li>
-    
-  
 </ul>
 
     </nav>
@@ -174,7 +168,7 @@ May 6, 2020
                 <!-- Add your table of contents here -->
 
 
-                <h1 id="how-to-use-mathjax">How to Use MathJax</h1>
+                <h2 id="how-to-use-mathjax">How to Use MathJax</h2>
 
 <p>This is a formula:</p>
 
@@ -187,13 +181,6 @@ f(x) = \int^{a}_{b} x dx
 f(x) = \int^{a}_{b} x dx
 \\]
 </code></pre></div></div>
-
-<!-- add mathjax javascript -->
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-
-<script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-
 
 
                 <!-- Pagination links -->
@@ -290,12 +277,6 @@ f(x) = \int^{a}_{b} x dx
       </li>
     
   
-    
-      <li>
-        <a href="https://chwyean.github.io/contact">Contact</a>
-      </li>
-    
-  
 </ul>
 
 
@@ -344,6 +325,17 @@ f(x) = \int^{a}_{b} x dx
         
         
         
+        <script>
+            MathJax = {
+                tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+                }
+            };
+        </script>
+        <script type="text/javascript" id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+        
         <script type="application/ld+json">
         {
             "@context": "http://schema.org",
@@ -366,14 +358,8 @@ Use this code:
 f(x) = \int^{a}_{b} x dx
 \\]
 
-
-
-
-
-
-
 ",
-            "wordcount": "43",
+            "wordcount": "31",
             "inLanguage": "en",
             "dateCreated": "2020-05-06/",
             "datePublished": "2020-05-06/",
@@ -404,7 +390,7 @@ f(x) = \int^{a}_{b} x dx
             "mainEntityOfPage": "True",
             "genre": "",
             "articleSection": "",
-            "keywords": [""]
+            "keywords": ["markdown"]
         }
         </script>
     </body>

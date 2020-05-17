@@ -20,7 +20,7 @@
     <title>Create Word Cloud Images with Python | chwyean's blog</title>
     <meta name="description" content="This blog is like a personal notebook where I write down different technologies I learned, experimented or found interesting.">
     
-        <meta name="keywords" content="">
+        <meta name="keywords" content="python">
     
 
     <!-- Social: Twitter -->
@@ -123,12 +123,6 @@
       </li>
     
   
-    
-      <li>
-        <a href="https://chwyean.github.io/contact">Contact</a>
-      </li>
-    
-  
 </ul>
 
     </nav>
@@ -179,7 +173,7 @@ May 16, 2020
 <p><img src="/assets/img/pokemon-2.png" alt="pokemon2" /></p>
 
 <p>I came across a fun and simple python package called <a href="https://amueller.github.io/word_cloud">wordcloud</a>.
-I will give a short tutorial in this post, adapted from this 
+I will give a short tutorial in this post, adapted from this
 <a href="https://amueller.github.io/word_cloud/auto_examples/colored.html">example</a> on the official site.</p>
 
 <h2 id="whats-a-word-cloud">What’s a Word Cloud?</h2>
@@ -197,7 +191,7 @@ We will take a base image (Pikachu!) and generate something like this:</p>
 
 <h2 id="install-python-package">Install python package</h2>
 
-<p>First, you will need the <code class="language-plaintext highlighter-rouge">wordcloud</code> package. 
+<p>First, you will need the <code class="language-plaintext highlighter-rouge">wordcloud</code> package.
 Use <code class="language-plaintext highlighter-rouge">pip</code> or <code class="language-plaintext highlighter-rouge">conda</code> to install it.
 I use wordcloud version <code class="language-plaintext highlighter-rouge">1.7.0</code> and Python 3.7 for this tutorial.</p>
 
@@ -211,7 +205,7 @@ And run <code class="language-plaintext highlighter-rouge">pip install -r requir
 
 <h2 id="the-python-code">The python code</h2>
 
-<p>I will work in a Jupyter notebook. 
+<p>I will work in a Jupyter notebook.
 The input files can be found on <a href="https://github.com/chwyean/wordcloud-tutorial">github</a>.</p>
 
 <p>First, let’s import the packages.</p>
@@ -255,11 +249,17 @@ the generation of the image. Changing these parameters may not always change the
 Even if you set <code class="language-plaintext highlighter-rouge">max_words=10000</code>, there might not be enough space to display that many words.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">wc</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">background_color</span><span class="o">=</span><span class="s">"white"</span><span class="p">,</span> <span class="n">max_words</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-               <span class="n">mask</span><span class="o">=</span><span class="n">orig_image</span><span class="p">,</span> 
+               <span class="n">mask</span><span class="o">=</span><span class="n">orig_image</span><span class="p">,</span>
                <span class="n">color_func</span><span class="o">=</span><span class="n">image_colors</span><span class="p">,</span>
                <span class="n">stopwords</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                <span class="n">max_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">min_font_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">11013</span><span class="p">)</span>
 <span class="n">wc</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code></pre></figure>
+
+<p>If you want to change the background color, the color input needs to be
+compatible with HTML style.
+A list of named colors can be found at
+<a href="https://htmlcolorcodes.com/color-names/">htmlcolorcodes.com/color-names/</a>.
+If you want to define a color using <strong>rgb</strong> format, set <code class="language-plaintext highlighter-rouge">background_color="rgb(150,150,255)"</code> for example.</p>
 
 <p>Let’s now display the word cloud in Jupyter and save it to the file <code class="language-plaintext highlighter-rouge">output.png</code>.
 You can try different interpolation algorithms like <code class="language-plaintext highlighter-rouge">bicubic</code>, <code class="language-plaintext highlighter-rouge">gaussian</code>, and more.
@@ -268,7 +268,7 @@ I find <code class="language-plaintext highlighter-rouge">bilinear</code> works 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">"off"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">"bilinear"</span><span class="p">)</span>
-    
+
 <span class="c1"># must save image before calling plt.show()    
 </span><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'output.png'</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">'tight'</span><span class="p">)</span>
 
@@ -384,12 +384,6 @@ here are the answers: #1 is <strong>Pikachu</strong>, and #2 is <strong>Mew</str
       </li>
     
   
-    
-      <li>
-        <a href="https://chwyean.github.io/contact">Contact</a>
-      </li>
-    
-  
 </ul>
 
 
@@ -452,7 +446,7 @@ here are the answers: #1 is <strong>Pikachu</strong>, and #2 is <strong>Mew</str
 
 
 I came across a fun and simple python package called wordcloud.
-I will give a short tutorial in this post, adapted from this 
+I will give a short tutorial in this post, adapted from this
 example on the official site.
 
 What’s a Word Cloud?
@@ -470,7 +464,7 @@ We will take a base image (Pikachu!) and generate something like this:
 
 Install python package
 
-First, you will need the wordcloud package. 
+First, you will need the wordcloud package.
 Use pip or conda to install it.
 I use wordcloud version 1.7.0 and Python 3.7 for this tutorial.
 
@@ -484,7 +478,7 @@ And run pip install -r requirements.txt in a terminal.
 
 The python code
 
-I will work in a Jupyter notebook. 
+I will work in a Jupyter notebook.
 The input files can be found on github.
 
 First, let’s import the packages.
@@ -528,11 +522,17 @@ the generation of the image. Changing these parameters may not always change the
 Even if you set max_words=10000, there might not be enough space to display that many words.
 
 wc = WordCloud(background_color=&quot;white&quot;, max_words=1000, repeat=True,
-               mask=orig_image, 
+               mask=orig_image,
                color_func=image_colors,
                stopwords=None,
                max_font_size=40, min_font_size=3, random_state=11013)
 wc.generate(text)
+
+If you want to change the background color, the color input needs to be
+compatible with HTML style.
+A list of named colors can be found at
+htmlcolorcodes.com/color-names/.
+If you want to define a color using rgb format, set background_color=&quot;rgb(150,150,255)&quot; for example.
 
 Let’s now display the word cloud in Jupyter and save it to the file output.png.
 You can try different interpolation algorithms like bicubic, gaussian, and more.
@@ -541,7 +541,7 @@ I find bilinear works nicely for text.
 plt.figure(figsize=(15,10))
 plt.axis(&quot;off&quot;)
 plt.imshow(wc, interpolation=&quot;bilinear&quot;)
-    
+
 # must save image before calling plt.show()    
 plt.savefig('output.png',bbox_inches='tight')
 
@@ -562,7 +562,7 @@ Finally, the answers are…
 In case you are still scratching your head over the Pokemon images shown at the start of this post,
 here are the answers: #1 is Pikachu, and #2 is Mew.
 ",
-            "wordcount": "805",
+            "wordcount": "850",
             "inLanguage": "en",
             "dateCreated": "2020-05-16/",
             "datePublished": "2020-05-16/",
@@ -593,7 +593,7 @@ here are the answers: #1 is Pikachu, and #2 is Mew.
             "mainEntityOfPage": "True",
             "genre": "",
             "articleSection": "",
-            "keywords": [""]
+            "keywords": ["python"]
         }
         </script>
     </body>
